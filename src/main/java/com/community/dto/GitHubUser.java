@@ -1,23 +1,11 @@
 package com.community.dto;
 
+import lombok.Data;
 
+@Data
 public class GitHubUser {
-    private String login;
+    private  String login;
     private  Long id;
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String bio;
+    private String avatar_url;
 }
