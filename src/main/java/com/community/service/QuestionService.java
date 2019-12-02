@@ -109,5 +109,21 @@ public class QuestionService {
         Question question = questionMapper.getById(id);
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);//将question的属性赋值给questionDTO
+        User user = userMapper.findById(question.getCreator());
+        questionDTO.setUser(user);
+
+        return questionDTO;
+    }
+
+    public void createOrUpdate(Question question) {
+        if(question.getId() == null){
+            //创建
+            question.setGmtCreate(System.currentTimeMillis());
+            questionMapper.create(question);
+        }else{
+            //跟新
+            question.setGmtModified(question.getGmtCreate());
+            questionMapper.update(question);
+        }
     }
 }
