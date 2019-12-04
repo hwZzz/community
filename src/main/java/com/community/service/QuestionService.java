@@ -2,6 +2,8 @@ package com.community.service;
 
 import com.community.dto.PageDTO;
 import com.community.dto.QuestionDTO;
+import com.community.exception.CustomizeErrorCode;
+import com.community.exception.CustomizeException;
 import com.community.mapper.QuestionMapper;
 import com.community.mapper.UserMapper;
 import com.community.model.Question;
@@ -107,6 +109,9 @@ public class QuestionService {
 
     public QuestionDTO getById(Integer id) {
         Question question = questionMapper.getById(id);
+        if(question == null){
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);//将question的属性赋值给questionDTO
         User user = userMapper.findById(question.getCreator());
