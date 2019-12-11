@@ -3,6 +3,8 @@ package com.community.mapper;
 import com.community.model.User;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
 
@@ -20,4 +22,7 @@ public interface UserMapper {
 
     @Update("update user set name = #{name},token = #{token},gmt_modified = #{gmtModified},avatar_url = #{avatarUrl} where id = #{id}")
     void update(User User);
+
+    @Select("select * from user where id in (${userIds})")
+    List<User> getUsers(List<Long> userIds);
 }
