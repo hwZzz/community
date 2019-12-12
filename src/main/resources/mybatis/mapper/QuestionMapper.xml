@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.community.mapper.QuestionMapper" >
+
+    <insert id="insert" parameterType="com.community.model.Question">
+        insert into question (title,description,gmt_create,gmt_modified,creator,tag) values (#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{tag})
+    </insert>
+
+    <select id="list" resultType="com.community.model.Question">
+        select * from question limit #{offset},#{size}
+    </select>
+
+    <select id="count" resultType="Integer">
+        select count(1) from question
+    </select>
+
+    <select id="listByUserId" resultType="com.community.model.Question">
+        select * from question where creator = #{userId} limit #{offset},#{size}
+    </select>
+
+    <select id="countByUserId" parameterType="Long" resultType="Integer">
+        select count(1) from question where creator = #{userId}
+    </select>
+
+    <select id="getById" parameterType="Long" resultType="com.community.model.Question">
+        select * from question where id = #{id}
+    </select>
+
+    <update id="update" parameterType="com.community.model.Question">
+        update question set title = #{title}, description = #{description},gmt_modified = #{gmtModified},tag = #{tag} where id = #{id}
+    </update>
+
+    <update id="updateViewCount" parameterType="Long">
+        update question set view_count = view_count + 1 where id = #{id}
+    </update>
+
+    <update id="updateCommentCount" parameterType="Long">
+        update question set comment_count = comment_count + 1 where id = ${id}
+    </update>
+</mapper>

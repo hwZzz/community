@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.community.mapper.UserMapper" >
+
+
+    <insert id="insert" parameterType="com.community.model.User">
+        insert into `user` (`name`,account_id,token,gmt_create,gmt_modified,avatar_url) values (#{name},#{accountId},#{token},#{gmtCreate},#{gmtModified},#{avatarUrl})
+    </insert>
+
+    <select id="findByToken" parameterType="string" resultType="com.community.model.User">
+        select * from `user` where token = #{token}
+    </select>
+
+    <select id="findById" parameterType="Long" resultType="com.community.model.User">
+        select * from `user` where id = #{id}
+    </select>
+
+    <select id="findByAccountId" parameterType="string" resultType="com.community.model.User">
+        select * from `user` where account_id = #{accountId}
+    </select>
+
+    <update id="update" parameterType="com.community.model.User">
+        update `user` set `name` = #{name},token = #{token},gmt_modified = #{gmtModified},avatar_url = #{avatarUrl} where id = #{id}
+    </update>
+
+    <select id="getUsers" resultType="com.community.model.User">
+        select * from `user` where id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+    </select>
+</mapper>

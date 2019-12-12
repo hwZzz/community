@@ -47,8 +47,7 @@ public class CommentService {
             if(dbComment == null){
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
-            commentMapper.insert(comment);
-        }else{
+         }else{
             //回复问题
                 Question question = questionMapper.getById(comment.getParentId());
                 if(question == null){
@@ -59,8 +58,9 @@ public class CommentService {
         }
     }
 
-    public List<CommentDTO> listByQuestionId(Long id) {
-        List<Comment> comments = commentMapper.listByQuestionId(id);
+    public List<CommentDTO> listByQuestionId(Long id,CommentTypeEnum type) {
+        Integer type1 = type.getType();
+        List<Comment> comments = commentMapper.listByQuestionId(id,type1);
 
         if(comments.size() == 0){
             return new ArrayList<>();
