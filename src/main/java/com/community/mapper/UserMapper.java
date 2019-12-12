@@ -18,5 +18,5 @@ public interface UserMapper {
 
     void update(User User);
 
-    List<User> getUsers(@Param("userIds") List<Long> userIds);
+    List<User> getUsers(List<Long> userIds);
 }

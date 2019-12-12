@@ -10,6 +10,6 @@
     </select>
 
     <select id="listByQuestionId" resultType="com.community.model.Comment">
-        select * from comment where parent_id = #{parentId} and `type` = #{type1}
+        select * from comment where parent_id = #{parentId} and `type` = #{type1} order by gmt_create desc
     </select>
 </mapper>
