@@ -14,4 +14,6 @@ public interface CommentMapper {
     Comment getById(@Param("parentId") Long parentId);
 
     List<Comment> listByQuestionId(@Param("parentId") Long parentId,@Param("type1")Integer type1);
+
+    int incCommentCount(Comment comment);
 }

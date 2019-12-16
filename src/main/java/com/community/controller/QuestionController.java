@@ -26,7 +26,7 @@ public class QuestionController {
                            Model model){
         QuestionDTO questionDTO = questionService.getById(id);
 
-      List<CommentDTO> comments = commentService.listByQuestionId(id, CommentTypeEnum.QUESTION);
+      List<CommentDTO> comments = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
         //累加阅读数
         questionService.incView(id);
         model.addAttribute("question",questionDTO);

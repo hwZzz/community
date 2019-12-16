@@ -12,4 +12,8 @@
     <select id="listByQuestionId" resultType="com.community.model.Comment">
         select * from comment where parent_id = #{parentId} and `type` = #{type1} order by gmt_create desc
     </select>
+
+    <update id="incCommentCount" parameterType="com.community.model.Comment">
+        update comment set comment_count = comment_count + #{commentCount} where id = ${id}
+    </update>
 </mapper>
