@@ -3,6 +3,8 @@ package com.community.dto;
 import com.community.model.User;
 import lombok.Data;
 
+import java.util.List;
+
 
 @Data
 public class QuestionDTO {
@@ -17,4 +19,5 @@ public class QuestionDTO {
     private Integer commentCount;
     private Integer likeCount;
     private User user;
+
 }

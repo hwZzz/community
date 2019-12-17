@@ -26,4 +26,6 @@ public interface QuestionMapper {
     void updateViewCount(@Param("id") Long id);
 
     void updateCommentCount(@Param("id") Long id);
+
+    List<Question> selectRelated(Question question);
 }

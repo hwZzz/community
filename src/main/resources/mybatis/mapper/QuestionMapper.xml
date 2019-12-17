@@ -37,4 +37,8 @@
     <update id="updateCommentCount" parameterType="Long">
         update question set comment_count = comment_count + 1 where id = ${id}
     </update>
+
+    <select id="selectRelated" parameterType="com.community.model.Question" resultType="com.community.model.Question">
+        select * from question where id != #{id} and tag regexp #{tag}
+    </select>
 </mapper>
