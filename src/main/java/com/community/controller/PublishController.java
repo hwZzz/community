@@ -6,6 +6,7 @@ import com.community.dto.QuestionDTO;
 import com.community.model.Question;
 import com.community.model.User;
 import com.community.service.QuestionService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,6 +67,11 @@ public class PublishController {
             return "publish";
         }
 
+        String invalid = TagCache.filterInvalid(tag);
+        if (StringUtils.isNotBlank(invalid)) {
+            model.addAttribute("error", "输入非法标签:" + invalid);
+            return "publish";
+        }
 
         User user = (User)request.getSession().getAttribute("user");
         if(user == null){
