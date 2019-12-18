@@ -64,7 +64,7 @@ public class QuestionService {
             questionDTO.setUser(user); //将USER赋给questionDTO
             questionDTOList.add(questionDTO);
         }
-        pageDTO.setQuestions(questionDTOList);
+        pageDTO.setData(questionDTOList);
         return pageDTO;
     }
 
@@ -108,7 +108,7 @@ public class QuestionService {
             questionDTOList.add(questionDTO);
         }
 
-        pageDTO.setQuestions(questionDTOList);
+        pageDTO.setData(questionDTOList);
         return pageDTO;
     }
 
