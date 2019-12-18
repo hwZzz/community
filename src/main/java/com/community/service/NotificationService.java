@@ -2,7 +2,10 @@ package com.community.service;
 
 import com.community.dto.NotificationDTO;
 import com.community.dto.PageDTO;
+import com.community.enums.NotificationStatusEnum;
 import com.community.enums.NotificationTypeEnum;
+import com.community.exception.CustomizeErrorCode;
+import com.community.exception.CustomizeException;
 import com.community.mapper.NotificationMapper;
 import com.community.mapper.UserMapper;
 import com.community.model.Notification;
@@ -11,10 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -51,7 +51,7 @@ public class NotificationService {
         pageDTO.setPagination(totalPage,page);
 
         Integer offset = size *(page -1); //分页,offset（从多少开始)
-        List<Notification> notifications = notificationMapper.listByUserId(userId,offset,size);  //问题列表
+        List<Notification> notifications = notificationMapper.listByReceiver(userId,offset,size);  //问题列表
 
         if(notifications.size() == 0){
             return pageDTO;
@@ -62,10 +62,32 @@ public class NotificationService {
         for (Notification notification : notifications) {
             NotificationDTO notificationDTO = new NotificationDTO();
             BeanUtils.copyProperties(notification, notificationDTO);
-            notificationDTO.setType(NotificationTypeEnum.nameOfType(notification.getType()));
+            notificationDTO.setTypeName(NotificationTypeEnum.nameOfType(notification.getType()));
             notificationDTOS.add(notificationDTO);
         }
         pageDTO.setData(notificationDTOS);
         return pageDTO;
+    }
+
+    public Long unreadCount(Long userId) {
+        Long unreadCount = notificationMapper.unreadCount(userId,NotificationStatusEnum.UNREAD.getStatus());
+        return unreadCount;
+    }
+
+    public NotificationDTO read(Long id, User user) {
+        Notification notification = notificationMapper.getById(id);
+            if(notification == null){
+                throw new CustomizeException(CustomizeErrorCode.NOTIFICATION_NOT_FOUND);
+            }
+            if(!Objects.equals(notification.getReceiver(), user.getId())){
+                throw new CustomizeException(CustomizeErrorCode.READ_NOTIFICATION_FAIL);
+            }
+
+            notification.setStatus(NotificationStatusEnum.READ.getStatus());
+            notificationMapper.updateById(notification);
+        NotificationDTO notificationDTO = new NotificationDTO();
+        BeanUtils.copyProperties(notification, notificationDTO);
+        notificationDTO.setTypeName(NotificationTypeEnum.nameOfType(notification.getType()));
+        return notificationDTO;
     }
 }

@@ -15,7 +15,7 @@
     </select>
 
     <select id="listByUserId" resultType="com.community.model.Question">
-        select * from question where creator = #{userId} limit #{offset},#{size}
+        select * from question where creator = #{userId} order by gmt_create desc limit #{offset},#{size}
     </select>
 
     <select id="countByUserId" parameterType="Long" resultType="Integer">

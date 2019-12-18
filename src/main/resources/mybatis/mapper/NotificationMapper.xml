@@ -2,13 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.community.mapper.NotificationMapper" >
     <insert id="insert" parameterType="com.community.model.Notification">
-        insert into notification (notifier,receiver,outer_id,`type`,gmt_create,status) values (#{notifier},#{receiver},#{outerId},#{type},#{gmt_create},#{status})
+        insert into notification (notifier,receiver,outer_id,`type`,gmt_create,status,notifier_name,outer_title) values (#{notifier},#{receiver},#{outerId},#{type},#{gmtCreate},#{status},#{notifierName},#{outerTitle})
     </insert>
 
+    <select id="unreadCount" parameterType="Long" resultType="Long">
+        select count(1) from notification where receiver = #{userId} and status = #{status}
+    </select>
 
+    <select id="countByUserId" resultType="Integer">
+        select count(1) from notification where receiver = #{userId}
+    </select>
 
+    <select id="listByReceiver" resultType="com.community.model.Notification">
+        select * from notification where receiver = #{userId} order by gmt_create desc limit #{offset},#{size}
+    </select>
 
+    <select id="getById" parameterType="Long" resultType="com.community.model.Notification">
+        select * from notification where id = #{id}
+    </select>
 
-
+    <update id="update" parameterType="com.community.model.Notification">
+        update notification set notifier = #{notifier = #{notifier}, receiver = #{receiver}, outer_id = #{outerId},`type` = #{type} ,gmt_create = #{gmtCreate}, status = #{status},notifier_name = #{notifierName},outer_title = #{outerTitle} where id = #{id}
+    </update>
 
 </mapper>
