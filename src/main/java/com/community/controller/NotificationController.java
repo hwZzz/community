@@ -2,6 +2,7 @@ package com.community.controller;
 
 import com.community.dto.NotificationDTO;
 import com.community.dto.PageDTO;
+import com.community.enums.NotificationTypeEnum;
 import com.community.model.User;
 import com.community.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,12 @@ public class NotificationController {
             return "redirect:/";
         }
 
-        NotificationDTO notificationDTO = notificationService.read(id,user);
-
-        return "profile";
+        NotificationDTO notificationDTO = notificationService.read(id, user);
+        if (NotificationTypeEnum.REPLY_COMMENT.getType() == notificationDTO.getType()
+                || NotificationTypeEnum.REPLY_QUESTION.getType() == notificationDTO.getType()) {
+            return "redirect:/question/" + notificationDTO.getOuterId();
+        } else {
+            return "redirect:/";
+        }
     }
 }

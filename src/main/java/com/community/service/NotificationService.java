@@ -69,8 +69,8 @@ public class NotificationService {
         return pageDTO;
     }
 
-    public Long unreadCount(Long userId) {
-        Long unreadCount = notificationMapper.unreadCount(userId,NotificationStatusEnum.UNREAD.getStatus());
+    public Integer unreadCount(Long userId) {
+        Integer unreadCount = notificationMapper.unreadCount(userId,NotificationStatusEnum.UNREAD.getStatus());
         return unreadCount;
     }
 
