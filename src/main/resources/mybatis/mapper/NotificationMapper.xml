@@ -21,7 +21,7 @@
         select * from notification where id = #{id}
     </select>
 
-    <update id="update" parameterType="com.community.model.Notification">
+    <update id="updateById" parameterType="com.community.model.Notification">
         update notification set notifier = #{notifier}, receiver = #{receiver}, outer_id = #{outerId},`type` = #{type} ,gmt_create = #{gmtCreate}, status = #{status},notifier_name = #{notifierName},outer_title = #{outerTitle} where id = #{id}
     </update>
 
