@@ -1,5 +1,6 @@
 package com.community.mapper;
 
+import com.community.dto.QuestionQueryDTO;
 import com.community.model.Question;
 import org.apache.ibatis.annotations.*;
 
@@ -28,4 +29,8 @@ public interface QuestionMapper {
     void updateCommentCount(@Param("id") Long id);
 
     List<Question> selectRelated(Question question);
+
+    Integer countBySearch(QuestionQueryDTO questionQueryDTO);
+
+    List<Question> selectBySearch(QuestionQueryDTO questionQueryDTO);
 }

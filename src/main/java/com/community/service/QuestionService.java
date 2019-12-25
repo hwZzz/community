@@ -2,6 +2,7 @@ package com.community.service;
 
 import com.community.dto.PageDTO;
 import com.community.dto.QuestionDTO;
+import com.community.dto.QuestionQueryDTO;
 import com.community.exception.CustomizeErrorCode;
 import com.community.exception.CustomizeException;
 import com.community.mapper.QuestionMapper;
@@ -13,11 +14,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,13 +28,22 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
-    public PageDTO list(Integer page, Integer size) {  //将两个类拼装在一起。
+    public PageDTO list(String search,Integer page, Integer size) {  //将两个类拼装在一起。
+
+
+        if(StringUtils.isNotBlank(search)){
+            String[] tags = StringUtils.split(search," ");
+            search = Arrays.stream(tags).collect(Collectors.joining("|"));
+        }
 
         PageDTO pageDTO = new PageDTO();
 
         Integer totalPage;
 
-        Integer totalCount = questionMapper.count();      //用户提问的总数
+        QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
+        questionQueryDTO.setSearch(search);
+
+        Integer totalCount = questionMapper.countBySearch(questionQueryDTO);      //用户提问的总数
 
         if (totalCount % size ==0){
             totalPage = totalCount / size;
@@ -54,7 +62,9 @@ public class QuestionService {
 
         Integer offset = size *(page -1); //分页,offset（从多少开始)
 
-        List<Question> questions = questionMapper.list(offset,size);  //问题列表
+        questionQueryDTO.setSize(size);
+        questionQueryDTO.setPage(offset);
+        List<Question> questions = questionMapper.selectBySearch(questionQueryDTO);  //问题列表
         List<QuestionDTO> questionDTOList = new ArrayList<>();     //准备放入问题列表+用户的组合类的列表
 
         for (Question question : questions) {

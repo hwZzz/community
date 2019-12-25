@@ -25,10 +25,15 @@ public class AliyunProvider {
     private String accessKeySecret;
 
     //空间
-    private String bucketName = "hwzzz";
+    @Value("${aliyun.file.bucket-name}")
+    private String bucketName;
 
     // Endpoint以杭州为例，其它Region请按实际情况填写。
-    String endpoint = "http://oss-cn-chengdu.aliyuncs.com";
+    @Value("${aliyun.file.endpoint}")
+    private String endpoint;
+
+    @Value("${aliyun.file.expires}")
+    private Long expires;
 
     Log log = LogFactory.getLog(AliyunProvider.class);
 
@@ -211,7 +216,7 @@ public class AliyunProvider {
      */
     public String getUrl(String key) {
         // 设置URL过期时间为10年  3600l* 1000*24*365*10
-        Date expiration = new Date(new Date().getTime() + 3600l * 1000 * 24 * 365 * 10);
+        Date expiration = new Date(new Date().getTime() + expires);
         // 生成URL
         URL url = ossClient.generatePresignedUrl(bucketName, key, expiration);
         if (url != null) {

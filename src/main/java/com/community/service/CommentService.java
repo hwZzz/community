@@ -80,6 +80,7 @@ public class CommentService {
                 }
                 comment.setCommentCount(0);
                 commentMapper.insert(comment);
+                question.setCommentCount(1);
                 questionMapper.updateCommentCount(question.getId());
 
                 //创建通知
@@ -97,6 +98,11 @@ public class CommentService {
      * @param outerId
      */
     private void createNotify(Comment comment, Long receiver, String notifierName, String outerTitle, NotificationTypeEnum notificationType, Long outerId){
+
+        if(receiver == comment.getCommentator()){
+            return ;
+        }
+
         Notification notification = new Notification();
         notification.setGmtCreate(System.currentTimeMillis());
         notification.setType(notificationType.getType());
