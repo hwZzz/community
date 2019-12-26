@@ -1,0 +1,38 @@
+2019-12-26 14:54:24.957  INFO 6884 --- [main] com.community.SplearnApplication         : Starting SplearnApplication on GDNN7LPQOZ48BB6 with PID 6884 (D:\SpringBootlearn2\target\classes started by Administrator in D:\SpringBootlearn2)
+2019-12-26 14:54:24.961  INFO 6884 --- [main] com.community.SplearnApplication         : No active profile set, falling back to default profiles: default
+2019-12-26 14:54:25.157  WARN 6884 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2019-12-26 14:54:26.638  INFO 6884 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2019-12-26 14:54:26.649  INFO 6884 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-12-26 14:54:26.649  INFO 6884 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2019-12-26 14:54:26.753  INFO 6884 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-12-26 14:54:26.754  INFO 6884 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1742 ms
+2019-12-26 14:54:27.351  INFO 6884 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-12-26 14:54:27.429  INFO 6884 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-12-26 14:54:27.695  INFO 6884 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2019-12-26 14:54:27.698  INFO 6884 --- [main] com.community.SplearnApplication         : Started SplearnApplication in 3.235 seconds (JVM running for 4.544)
+2019-12-26 16:29:53.651  INFO 6884 --- [http-nio-8088-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-12-26 16:29:53.651  INFO 6884 --- [http-nio-8088-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-12-26 16:29:53.658  INFO 6884 --- [http-nio-8088-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2019-12-26 16:29:53.731  INFO 6884 --- [http-nio-8088-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-12-26 16:29:54.031  INFO 6884 --- [http-nio-8088-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-12-26 16:29:54.050 DEBUG 6884 --- [http-nio-8088-exec-1] c.c.mapper.QuestionMapper.countBySearch  : ==>  Preparing: select count(*) from question 
+2019-12-26 16:29:54.115 DEBUG 6884 --- [http-nio-8088-exec-1] c.c.mapper.QuestionMapper.countBySearch  : ==> Parameters: 
+2019-12-26 16:29:54.220 DEBUG 6884 --- [http-nio-8088-exec-1] c.c.mapper.QuestionMapper.countBySearch  : <==      Total: 1
+2019-12-26 16:29:54.226 DEBUG 6884 --- [http-nio-8088-exec-1] c.c.m.QuestionMapper.selectBySearch      : ==>  Preparing: select * from question order by gmt_create desc limit ?,? 
+2019-12-26 16:29:54.227 DEBUG 6884 --- [http-nio-8088-exec-1] c.c.m.QuestionMapper.selectBySearch      : ==> Parameters: 0(Integer), 5(Integer)
+2019-12-26 16:29:54.257 DEBUG 6884 --- [http-nio-8088-exec-1] c.c.m.QuestionMapper.selectBySearch      : <==      Total: 5
+2019-12-26 16:29:54.259 DEBUG 6884 --- [http-nio-8088-exec-1] c.community.mapper.UserMapper.findById   : ==>  Preparing: select * from `user` where id = ? 
+2019-12-26 16:29:54.259 DEBUG 6884 --- [http-nio-8088-exec-1] c.community.mapper.UserMapper.findById   : ==> Parameters: 12(Long)
+2019-12-26 16:29:54.312 DEBUG 6884 --- [http-nio-8088-exec-1] c.community.mapper.UserMapper.findById   : <==      Total: 1
+2019-12-26 16:29:54.318 DEBUG 6884 --- [http-nio-8088-exec-1] c.community.mapper.UserMapper.findById   : ==>  Preparing: select * from `user` where id = ? 
+2019-12-26 16:29:54.318 DEBUG 6884 --- [http-nio-8088-exec-1] c.community.mapper.UserMapper.findById   : ==> Parameters: 12(Long)
+2019-12-26 16:29:54.320 DEBUG 6884 --- [http-nio-8088-exec-1] c.community.mapper.UserMapper.findById   : <==      Total: 1
+2019-12-26 16:29:54.320 DEBUG 6884 --- [http-nio-8088-exec-1] c.community.mapper.UserMapper.findById   : ==>  Preparing: select * from `user` where id = ? 
+2019-12-26 16:29:54.321 DEBUG 6884 --- [http-nio-8088-exec-1] c.community.mapper.UserMapper.findById   : ==> Parameters: 12(Long)
+2019-12-26 16:29:54.323 DEBUG 6884 --- [http-nio-8088-exec-1] c.community.mapper.UserMapper.findById   : <==      Total: 1
+2019-12-26 16:29:54.323 DEBUG 6884 --- [http-nio-8088-exec-1] c.community.mapper.UserMapper.findById   : ==>  Preparing: select * from `user` where id = ? 
+2019-12-26 16:29:54.324 DEBUG 6884 --- [http-nio-8088-exec-1] c.community.mapper.UserMapper.findById   : ==> Parameters: 12(Long)
+2019-12-26 16:29:54.326 DEBUG 6884 --- [http-nio-8088-exec-1] c.community.mapper.UserMapper.findById   : <==      Total: 1
+2019-12-26 16:29:54.327 DEBUG 6884 --- [http-nio-8088-exec-1] c.community.mapper.UserMapper.findById   : ==>  Preparing: select * from `user` where id = ? 
+2019-12-26 16:29:54.327 DEBUG 6884 --- [http-nio-8088-exec-1] c.community.mapper.UserMapper.findById   : ==> Parameters: 12(Long)
+2019-12-26 16:29:54.329 DEBUG 6884 --- [http-nio-8088-exec-1] c.community.mapper.UserMapper.findById   : <==      Total: 1
