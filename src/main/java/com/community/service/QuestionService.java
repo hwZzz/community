@@ -28,7 +28,7 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
-    public PageDTO list(String search,Integer page, Integer size) {  //将两个类拼装在一起。
+    public PageDTO list(String search, String tag, Integer page, Integer size) {  //将两个类拼装在一起。
 
 
         if(StringUtils.isNotBlank(search)){
@@ -42,6 +42,7 @@ public class QuestionService {
 
         QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
         questionQueryDTO.setSearch(search);
+        questionQueryDTO.setTag(tag);
 
         Integer totalCount = questionMapper.countBySearch(questionQueryDTO);      //用户提问的总数
 
@@ -174,4 +175,16 @@ public class QuestionService {
      }).collect(Collectors.toList());
      return questionDTOS;
     }
+
+    //删除帖子
+    public void delete(Long id) {
+        questionMapper.delete(id);
+    }
+
+    public Long findByCreatorId(Long id) {
+       Long creatorId =  questionMapper.findByCreatorId(id);
+
+       return creatorId;
+    }
+
 }

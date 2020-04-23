@@ -12,7 +12,6 @@ public class PageDTO<T> {
     private boolean showFirstPage;  //第一页
     private boolean showNext;  //下一页
     private boolean showEndPage; //最后一页
-
     private Integer page;  //当前页
     private List<Integer> pages = new ArrayList<>();//当前页码数左右的页码
     private Integer totalPage;

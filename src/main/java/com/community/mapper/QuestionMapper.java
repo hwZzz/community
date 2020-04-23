@@ -33,4 +33,8 @@ public interface QuestionMapper {
     Integer countBySearch(QuestionQueryDTO questionQueryDTO);
 
     List<Question> selectBySearch(QuestionQueryDTO questionQueryDTO);
+
+    void delete(Long id);
+
+    Long findByCreatorId(Long id);
 }

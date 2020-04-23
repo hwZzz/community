@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.community.mapper.AdMapper" >
+
+    <select id="list" resultType="com.community.model.Ad">
+        select * from ad where status = 1 and gmt_start &lt; #{currentTime} and pos = #{pos}
+    </select>
+
+</mapper>
