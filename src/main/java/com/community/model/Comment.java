@@ -3,7 +3,7 @@ package com.community.model;
 import lombok.Data;
 
 @Data
-public class Comment {
+public class    Comment {
     private Long id;
     private Long parentId;
     private Integer type;

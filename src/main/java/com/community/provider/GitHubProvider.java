@@ -7,6 +7,7 @@ import okhttp3.*;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 
 @Component
@@ -29,9 +30,14 @@ public class GitHubProvider {
     }
 
     public GitHubUser getUser(String accessToken){
-        OkHttpClient client = new OkHttpClient();
-        Request request =  new Request.Builder().url
-                ("https://api.github.com/user?access_token="+ accessToken).build();
+        //OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(120, TimeUnit.SECONDS)//设置连接超时时间
+                .readTimeout(120, TimeUnit.SECONDS)//设置读取超时时间
+                .build();
+        Request request =  new Request.Builder().url("https://api.github.com/user")
+                .header("Authorization","token " + accessToken).build();
+        //("https://api.github.com/user?access_token="+ accessToken)
         try {
             Response response = client.newCall(request).execute();
             String string = response.body().string();
